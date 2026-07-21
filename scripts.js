@@ -7,8 +7,49 @@ const prevButton = lightbox?.querySelector(".lightbox-prev");
 const nextButton = lightbox?.querySelector(".lightbox-next");
 const contactForm = document.querySelector(".contact-form");
 const formStatus = document.querySelector(".form-status");
+const scrollProgress = document.querySelector(".scroll-progress");
 
 let activeIndex = 0;
+
+document.documentElement.classList.add("js-enabled");
+
+const revealTargets = document.querySelectorAll(
+  ".quick-strip, .ticker, .intro-grid, .feature-band, .returns-layout, .split-showcase, .section-heading, .gallery-item, .contact-band"
+);
+
+const revealObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
+    )
+  : null;
+
+revealTargets.forEach((target, index) => {
+  target.classList.add("reveal");
+  target.style.setProperty("--reveal-delay", `${Math.min(index * 35, 240)}ms`);
+  revealObserver?.observe(target);
+});
+
+if (!revealObserver) {
+  revealTargets.forEach((target) => target.classList.add("is-visible"));
+}
+
+function updateScrollState() {
+  const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(window.scrollY / maxScroll, 1);
+  scrollProgress?.style.setProperty("--scroll", progress.toString());
+  document.body.classList.toggle("is-scrolled", window.scrollY > 16);
+}
+
+updateScrollState();
+window.addEventListener("scroll", updateScrollState, { passive: true });
 
 function showPhoto(index) {
   if (!lightbox || !lightboxImage || !lightboxCaption || galleryButtons.length === 0) {
