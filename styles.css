@@ -659,6 +659,14 @@ h2 {
     flex-direction: column;
   }
 
+  .returns-layout {
+    gap: 20px;
+  }
+
+  .returns-layout > div:first-child {
+    flex: 0 1 auto;
+  }
+
   .metric-grid {
     width: 100%;
     flex-basis: auto;

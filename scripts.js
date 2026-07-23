@@ -72,7 +72,7 @@ if (!revealObserver) {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
 }
 
-const stickyHiddenSections = document.querySelectorAll(".bedroom-layout, .video-band, .contact-band");
+const stickyHiddenSections = document.querySelectorAll(".bedroom-layout, .video-band, .returns, .contact-band");
 const stickyHiddenVisible = new Set();
 const stickyObserver = "IntersectionObserver" in window
   ? new IntersectionObserver(
