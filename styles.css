@@ -528,58 +528,6 @@ h2 {
   color: rgba(255, 255, 255, 0.76);
 }
 
-.contact-form {
-  width: min(480px, 100%);
-  display: grid;
-  gap: 16px;
-  padding: clamp(18px, 3vw, 28px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.contact-form label,
-.contact-form span {
-  display: grid;
-}
-
-.contact-form label {
-  gap: 8px;
-}
-
-.contact-form span {
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius);
-  padding: 13px 14px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: #8fe4d6;
-}
-
-.contact-form textarea {
-  resize: vertical;
-}
-
-.form-status {
-  min-height: 1.4em;
-  margin: 0;
-  color: #b8fff2;
-  line-height: 1.45;
-}
-
 .site-footer {
   align-items: center;
   justify-content: space-between;
@@ -799,10 +747,6 @@ h2 {
     aspect-ratio: 1 / 1;
   }
 
-  .contact-form {
-    padding: 16px;
-  }
-
   .site-footer {
     display: grid;
   }
@@ -903,6 +847,7 @@ body {
 }
 
 .hero-image {
+  object-position: 50% 60%;
   transform: scale(1.05);
   animation: heroDrift 18s ease-out forwards;
 }
@@ -920,6 +865,7 @@ body {
 }
 
 h1 {
+  max-width: 11ch;
   font-size: 8.25rem;
 }
 
@@ -1077,10 +1023,12 @@ h2 {
 
 .feature-media {
   position: relative;
+  aspect-ratio: 4 / 5;
   transform: rotate(-1deg);
 }
 
 .feature-media img {
+  object-position: center bottom;
   transition: transform 800ms ease;
 }
 
@@ -1179,13 +1127,76 @@ h2 {
 }
 
 .contact-copy,
-.contact-form {
+.contact-card {
   position: relative;
   z-index: 1;
 }
 
-.contact-form {
+.contact-card {
   box-shadow: var(--deep-shadow);
+}
+
+.video-band {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1fr);
+  gap: clamp(28px, 6vw, 84px);
+  align-items: center;
+  padding: clamp(70px, 10vw, 128px) clamp(18px, 5vw, 72px);
+  background: var(--surface);
+}
+
+.video-copy {
+  max-width: 560px;
+}
+
+.video-copy p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.video-frame {
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #07100d;
+  box-shadow: var(--deep-shadow);
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  max-height: 760px;
+  background: #07100d;
+}
+
+.contact-card {
+  width: min(500px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.contact-card span {
+  color: #8fe4d6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.contact-card strong {
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.contact-card p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.65;
 }
 
 .lightbox {
@@ -1250,6 +1261,12 @@ h2 {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+
+.is-sticky-hidden .mobile-sticky-cta {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(120%);
 }
 
 @keyframes heroDrift {
@@ -1389,5 +1406,30 @@ h2 {
   .js-enabled .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+@media (max-width: 1060px) {
+  .video-band {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .video-band {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .video-frame video {
+    max-height: 78svh;
+  }
+
+  .contact-card {
+    padding: 18px;
+  }
+
+  .contact-card strong {
+    font-size: 1.55rem;
   }
 }

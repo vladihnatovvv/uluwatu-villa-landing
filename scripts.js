@@ -5,8 +5,6 @@ const lightboxCaption = lightbox?.querySelector(".lightbox-caption");
 const closeButton = lightbox?.querySelector(".lightbox-close");
 const prevButton = lightbox?.querySelector(".lightbox-prev");
 const nextButton = lightbox?.querySelector(".lightbox-next");
-const contactForm = document.querySelector(".contact-form");
-const formStatus = document.querySelector(".form-status");
 const scrollProgress = document.querySelector(".scroll-progress");
 
 let activeIndex = 0;
@@ -14,7 +12,7 @@ let activeIndex = 0;
 document.documentElement.classList.add("js-enabled");
 
 const revealTargets = document.querySelectorAll(
-  ".quick-strip, .ticker, .intro-grid, .feature-band, .returns-layout, .split-showcase, .section-heading, .gallery-item, .contact-band"
+  ".quick-strip, .ticker, .intro-grid, .feature-band, .video-band, .returns-layout, .split-showcase, .section-heading, .gallery-item, .contact-band"
 );
 
 const revealObserver = "IntersectionObserver" in window
@@ -40,6 +38,26 @@ revealTargets.forEach((target, index) => {
 if (!revealObserver) {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
 }
+
+const stickyHiddenSections = document.querySelectorAll(".video-band, .contact-band");
+const stickyHiddenVisible = new Set();
+const stickyObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            stickyHiddenVisible.add(entry.target);
+          } else {
+            stickyHiddenVisible.delete(entry.target);
+          }
+        });
+        document.body.classList.toggle("is-sticky-hidden", stickyHiddenVisible.size > 0);
+      },
+      { threshold: 0.18 }
+    )
+  : null;
+
+stickyHiddenSections.forEach((section) => stickyObserver?.observe(section));
 
 function updateScrollState() {
   const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
@@ -95,13 +113,5 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "ArrowRight") {
     showPhoto(activeIndex + 1);
-  }
-});
-
-contactForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  if (formStatus) {
-    formStatus.textContent = "Inquiry captured in this preview. Connect the form to your direct contact channel before launch.";
   }
 });
