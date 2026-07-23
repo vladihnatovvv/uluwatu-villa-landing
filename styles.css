@@ -51,7 +51,7 @@ textarea {
 .site-header {
   position: fixed;
   inset: 0 0 auto 0;
-  z-index: 20;
+  z-index: 70;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -98,6 +98,29 @@ textarea {
 .nav-links a:hover,
 .nav-links a:focus-visible {
   opacity: 1;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 220ms ease, opacity 220ms ease;
 }
 
 .hero {
@@ -654,6 +677,59 @@ h2 {
 
   .nav-links {
     display: none;
+  }
+
+  .menu-toggle {
+    display: grid;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 76px;
+    right: 12px;
+    left: 12px;
+    display: grid;
+    gap: 4px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    background: rgba(9, 25, 20, 0.94);
+    box-shadow: 0 24px 60px rgba(3, 16, 13, 0.34);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px) scale(0.98);
+    transform-origin: top center;
+    visibility: hidden;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  }
+
+  .nav-links a {
+    padding: 13px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .is-menu-open .nav-links {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
+
+  .is-menu-open .menu-toggle span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .is-menu-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .is-menu-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   .hero {
@@ -1305,16 +1381,51 @@ h2 {
   box-shadow: 0 38px 90px rgba(3, 16, 13, 0.32);
 }
 
-.bedroom-card img {
+.bedroom-card > img,
+.bedroom-photo-pair img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 800ms ease, filter 800ms ease;
 }
 
-.bedroom-card:hover img {
+.bedroom-card:hover > img,
+.bedroom-card:hover .bedroom-photo-pair img {
   filter: saturate(1.08);
   transform: scale(1.04);
+}
+
+.bedroom-card:hover .bedroom-photo-pair img:last-child {
+  transform: rotate(-2deg) scale(1.04);
+}
+
+.bedroom-photo-pair {
+  position: absolute;
+  inset: 0;
+}
+
+.bedroom-photo-pair img {
+  position: absolute;
+  min-width: 0;
+  min-height: 0;
+}
+
+.bedroom-photo-pair img:first-child {
+  inset: 0;
+  object-position: 54% 58%;
+}
+
+.bedroom-photo-pair img:last-child {
+  top: 18px;
+  left: 18px;
+  z-index: 1;
+  width: min(42%, 240px);
+  height: 32%;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 10px;
+  box-shadow: 0 22px 55px rgba(3, 16, 13, 0.38);
+  object-position: 32% 50%;
+  transform: rotate(-2deg);
 }
 
 .bedroom-card::after {
@@ -1708,6 +1819,17 @@ h2 {
 
   .bedroom-card {
     min-height: 520px;
+  }
+
+  .bedroom-photo-pair {
+    display: block;
+  }
+
+  .bedroom-photo-pair img:last-child {
+    top: 14px;
+    left: 14px;
+    width: 38%;
+    height: 28%;
   }
 
   .bedroom-card-copy {

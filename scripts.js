@@ -8,10 +8,41 @@ const nextButton = lightbox?.querySelector(".lightbox-next");
 const scrollProgress = document.querySelector(".scroll-progress");
 const tiltTargets = document.querySelectorAll("[data-tilt]");
 const magneticTargets = document.querySelectorAll("[data-magnetic]");
+const siteHeader = document.querySelector(".site-header");
+const menuToggle = document.querySelector(".menu-toggle");
+const primaryNav = document.querySelector(".nav-links");
 
 let activeIndex = 0;
 
 document.documentElement.classList.add("js-enabled");
+
+function setMenuOpen(isOpen) {
+  if (!menuToggle) {
+    return;
+  }
+
+  document.body.classList.toggle("is-menu-open", isOpen);
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+}
+
+menuToggle?.addEventListener("click", () => {
+  setMenuOpen(!document.body.classList.contains("is-menu-open"));
+});
+
+primaryNav?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
+
+document.addEventListener("click", (event) => {
+  if (!document.body.classList.contains("is-menu-open") || !siteHeader) {
+    return;
+  }
+
+  if (event.target instanceof Node && !siteHeader.contains(event.target)) {
+    setMenuOpen(false);
+  }
+});
 
 const revealTargets = document.querySelectorAll(
   ".quick-strip, .ticker, .intro-grid, .feature-band, .bedroom-layout, .bedroom-card, .video-band, .returns-layout, .deal-flow, .deal-step, .split-showcase, .section-heading, .gallery-item, .contact-band"
@@ -135,6 +166,10 @@ lightbox?.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setMenuOpen(false);
+  }
+
   if (!lightbox?.open) {
     return;
   }

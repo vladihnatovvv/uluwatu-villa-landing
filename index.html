@@ -19,7 +19,12 @@
         <span class="brand-mark" aria-hidden="true"></span>
         <span>2BR Uluwatu Villa</span>
       </a>
-      <nav class="nav-links" aria-label="Page sections">
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="primary-nav" aria-label="Page sections">
         <a href="#details">Villa</a>
         <a href="#returns">Profit</a>
         <a href="#gallery">Gallery</a>
@@ -61,7 +66,7 @@
         </aside>
         <div class="hero-orbit" aria-hidden="true">
           <img src="assets/images/villa-05.jpg" alt="">
-          <img src="assets/images/villa-16.jpg" alt="">
+          <img src="assets/images/second-bedroom-suite.jpg" alt="">
         </div>
       </section>
 
@@ -146,11 +151,14 @@
             </div>
           </article>
           <article class="bedroom-card annex-suite" data-tilt>
-            <img src="assets/images/villa-16.jpg" alt="Separate annex bedroom with warm lights and wood bed" loading="lazy">
+            <div class="bedroom-photo-pair" aria-hidden="true">
+              <img src="assets/images/second-bedroom-suite.jpg" alt="" loading="lazy">
+              <img src="assets/images/second-bedroom-view.jpg" alt="" loading="lazy">
+            </div>
             <div class="bedroom-card-copy">
               <span>Bedroom 02</span>
               <strong>Separate guest annex</strong>
-              <p>The second bedroom is in a separate annex, giving guests privacy and making rentals more flexible.</p>
+              <p>The second bedroom is in a separate annex with its own room feel, guest privacy, and a window-side work/view corner.</p>
             </div>
           </article>
         </div>
@@ -233,7 +241,7 @@
         </div>
         <div class="showcase-images">
           <img src="assets/images/villa-03.jpg" alt="Upstairs bedroom with arched window and view" loading="lazy">
-          <img src="assets/images/villa-16.jpg" alt="Second bedroom suite in the 2BR Uluwatu villa" loading="lazy">
+          <img src="assets/images/second-bedroom-suite.jpg" alt="Second bedroom suite in the separate annex" loading="lazy">
         </div>
       </section>
 
@@ -255,8 +263,11 @@
           <button class="gallery-item" type="button" data-full="assets/images/villa-05.jpg" data-caption="Kitchen and dining">
             <img src="assets/images/villa-05.jpg" alt="Kitchen and dining area" loading="lazy">
           </button>
-          <button class="gallery-item" type="button" data-full="assets/images/villa-16.jpg" data-caption="Second bedroom suite">
-            <img src="assets/images/villa-16.jpg" alt="Second bedroom suite" loading="lazy">
+          <button class="gallery-item" type="button" data-full="assets/images/second-bedroom-suite.jpg" data-caption="Second bedroom suite">
+            <img src="assets/images/second-bedroom-suite.jpg" alt="Second bedroom suite" loading="lazy">
+          </button>
+          <button class="gallery-item" type="button" data-full="assets/images/second-bedroom-view.jpg" data-caption="Second bedroom window and work corner">
+            <img src="assets/images/second-bedroom-view.jpg" alt="Second bedroom window and work corner" loading="lazy">
           </button>
           <button class="gallery-item wide" type="button" data-full="assets/images/villa-01.jpg" data-caption="Tropical entrance">
             <img src="assets/images/villa-01.jpg" alt="Tropical villa entrance" loading="lazy">
