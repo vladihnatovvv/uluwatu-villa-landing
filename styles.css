@@ -1156,10 +1156,48 @@ h2 {
 }
 
 .video-frame {
+  position: relative;
   overflow: hidden;
   border-radius: var(--radius);
   background: #07100d;
   box-shadow: var(--deep-shadow);
+}
+
+.video-frame::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.video-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  color: #fff;
+  background: rgba(7, 16, 13, 0.64);
+  backdrop-filter: blur(14px);
+}
+
+.video-label span {
+  color: #8fe4d6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.video-label strong {
+  font-size: 0.98rem;
 }
 
 .video-frame video {
@@ -1197,6 +1235,228 @@ h2 {
   margin: 0;
   color: rgba(255, 255, 255, 0.76);
   line-height: 1.65;
+}
+
+.bedroom-layout {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(70px, 10vw, 132px) clamp(18px, 5vw, 72px);
+  background: #f3efe5;
+}
+
+.bedroom-layout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(16, 32, 27, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(16, 32, 27, 0.06) 1px, transparent 1px);
+  background-size: 86px 86px;
+  opacity: 0.45;
+}
+
+.bedroom-heading {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 100%);
+  margin-bottom: clamp(28px, 5vw, 56px);
+}
+
+.bedroom-heading p:last-child {
+  width: min(640px, 100%);
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.bedroom-stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 4vw, 44px);
+}
+
+.bedroom-stage::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18%;
+  left: 18%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+.bedroom-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 620px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  box-shadow: var(--deep-shadow);
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.bedroom-card:hover {
+  box-shadow: 0 38px 90px rgba(3, 16, 13, 0.32);
+}
+
+.bedroom-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 800ms ease, filter 800ms ease;
+}
+
+.bedroom-card:hover img {
+  filter: saturate(1.08);
+  transform: scale(1.04);
+}
+
+.bedroom-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 26%, rgba(7, 16, 13, 0.84));
+}
+
+.bedroom-card-copy {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1;
+  display: grid;
+  gap: 9px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  color: #fff;
+  background: rgba(7, 16, 13, 0.58);
+  backdrop-filter: blur(16px);
+  transform: translateZ(28px);
+}
+
+.bedroom-card-copy span,
+.deal-step span {
+  color: #8fe4d6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.bedroom-card-copy strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.bedroom-card-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.55;
+}
+
+.annex-suite {
+  margin-top: 74px;
+}
+
+.deal-flow {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.25fr);
+  gap: clamp(28px, 6vw, 84px);
+  padding: clamp(70px, 10vw, 128px) clamp(18px, 5vw, 72px);
+  background: var(--ink);
+  color: #fff;
+}
+
+.deal-flow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(228, 176, 74, 0.12), transparent 32%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: auto, 76px 100%;
+}
+
+.deal-flow-copy,
+.deal-steps {
+  position: relative;
+  z-index: 1;
+}
+
+.deal-flow .section-kicker {
+  color: #8fe4d6;
+}
+
+.deal-flow h2 {
+  margin-bottom: 0;
+}
+
+.deal-steps {
+  display: grid;
+  gap: 14px;
+}
+
+.deal-step {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 10px;
+  min-height: 170px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.deal-step::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--sun);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 320ms ease;
+}
+
+.deal-step:hover {
+  border-color: rgba(143, 228, 214, 0.36);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.deal-step:hover::before {
+  transform: scaleY(1);
+}
+
+.deal-step strong {
+  font-size: 1.35rem;
+  line-height: 1.1;
+  transform: translateZ(22px);
+}
+
+.deal-step p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+  transform: translateZ(18px);
+}
+
+[data-tilt] {
+  will-change: transform;
 }
 
 .lightbox {
@@ -1413,9 +1673,59 @@ h2 {
   .video-band {
     grid-template-columns: 1fr;
   }
+
+  .bedroom-stage,
+  .deal-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .bedroom-stage::before {
+    top: 12%;
+    right: auto;
+    bottom: 12%;
+    left: 50%;
+    width: 2px;
+    height: auto;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, transparent, var(--teal), transparent);
+  }
+
+  .annex-suite {
+    margin-top: 0;
+  }
 }
 
 @media (max-width: 760px) {
+  .bedroom-layout,
+  .deal-flow {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .bedroom-heading {
+    margin-bottom: 24px;
+  }
+
+  .bedroom-card {
+    min-height: 520px;
+  }
+
+  .bedroom-card-copy {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    padding: 14px;
+  }
+
+  .bedroom-card-copy strong {
+    font-size: 1.62rem;
+  }
+
+  .deal-step {
+    min-height: 150px;
+    padding: 18px;
+  }
+
   .video-band {
     padding-right: 16px;
     padding-left: 16px;
@@ -1431,5 +1741,11 @@ h2 {
 
   .contact-card strong {
     font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .bedroom-card {
+    min-height: 470px;
   }
 }

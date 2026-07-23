@@ -6,13 +6,15 @@ const closeButton = lightbox?.querySelector(".lightbox-close");
 const prevButton = lightbox?.querySelector(".lightbox-prev");
 const nextButton = lightbox?.querySelector(".lightbox-next");
 const scrollProgress = document.querySelector(".scroll-progress");
+const tiltTargets = document.querySelectorAll("[data-tilt]");
+const magneticTargets = document.querySelectorAll("[data-magnetic]");
 
 let activeIndex = 0;
 
 document.documentElement.classList.add("js-enabled");
 
 const revealTargets = document.querySelectorAll(
-  ".quick-strip, .ticker, .intro-grid, .feature-band, .video-band, .returns-layout, .split-showcase, .section-heading, .gallery-item, .contact-band"
+  ".quick-strip, .ticker, .intro-grid, .feature-band, .bedroom-layout, .bedroom-card, .video-band, .returns-layout, .deal-flow, .deal-step, .split-showcase, .section-heading, .gallery-item, .contact-band"
 );
 
 const revealObserver = "IntersectionObserver" in window
@@ -39,7 +41,7 @@ if (!revealObserver) {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
 }
 
-const stickyHiddenSections = document.querySelectorAll(".video-band, .contact-band");
+const stickyHiddenSections = document.querySelectorAll(".bedroom-layout, .video-band, .contact-band");
 const stickyHiddenVisible = new Set();
 const stickyObserver = "IntersectionObserver" in window
   ? new IntersectionObserver(
@@ -68,6 +70,36 @@ function updateScrollState() {
 
 updateScrollState();
 window.addEventListener("scroll", updateScrollState, { passive: true });
+
+const allowPointerMotion = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+if (allowPointerMotion) {
+  tiltTargets.forEach((target) => {
+    target.addEventListener("pointermove", (event) => {
+      const rect = target.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      target.style.transform = `perspective(900px) rotateX(${y * -5}deg) rotateY(${x * 6}deg) translateY(-3px)`;
+    });
+
+    target.addEventListener("pointerleave", () => {
+      target.style.transform = "";
+    });
+  });
+
+  magneticTargets.forEach((target) => {
+    target.addEventListener("pointermove", (event) => {
+      const rect = target.getBoundingClientRect();
+      const x = (event.clientX - (rect.left + rect.width / 2)) * 0.14;
+      const y = (event.clientY - (rect.top + rect.height / 2)) * 0.18;
+      target.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    target.addEventListener("pointerleave", () => {
+      target.style.transform = "";
+    });
+  });
+}
 
 function showPhoto(index) {
   if (!lightbox || !lightboxImage || !lightboxCaption || galleryButtons.length === 0) {
