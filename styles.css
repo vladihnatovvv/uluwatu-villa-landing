@@ -755,110 +755,19 @@ h2 {
   font-size: 3.1rem;
 }
 
-.lead-form {
-  display: grid;
-  gap: 16px;
-}
-
-.form-field {
-  display: grid;
-  gap: 12px;
-  margin: 0;
+.tally-panel {
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 18px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 14px 38px rgba(16, 32, 27, 0.08);
 }
 
-.form-field span,
-.form-field legend {
-  color: var(--ink);
-  font-weight: 900;
-}
-
-.form-field b {
-  color: var(--rose);
-}
-
-.form-field small,
-.form-note {
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.form-field input[type="text"],
-.form-field textarea {
+.tally-panel iframe {
+  display: block;
   width: 100%;
-  min-height: 50px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 13px 14px;
-  color: var(--ink);
-  background: #fbfaf6;
-  outline: 0;
-  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
-}
-
-.form-field textarea {
-  min-height: 118px;
-  resize: vertical;
-}
-
-.form-field input[type="text"]:focus,
-.form-field textarea:focus {
-  border-color: rgba(11, 111, 102, 0.62);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(11, 111, 102, 0.12);
-}
-
-.option-field {
-  gap: 14px;
-}
-
-.option-field legend {
-  padding: 0;
-}
-
-.option-field label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 38px;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.option-field input {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--teal);
-}
-
-.form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-  margin-top: 6px;
-}
-
-.lead-form.is-submitting {
-  opacity: 0.78;
-}
-
-.lead-form button:disabled {
-  cursor: progress;
-  background: var(--teal-dark);
-}
-
-.hidden-frame {
-  position: absolute;
-  width: 1px;
-  height: 1px;
+  min-height: 980px;
   border: 0;
-  opacity: 0;
-  pointer-events: none;
 }
 
 .thanks-page {
@@ -1165,13 +1074,8 @@ h2 {
     font-size: 2.28rem;
   }
 
-  .form-field {
-    padding: 15px;
-  }
-
-  .form-actions .button,
-  .form-actions .text-link {
-    width: 100%;
+  .tally-panel iframe {
+    min-height: 1120px;
   }
 
   .thanks-card .hero-actions .button {
