@@ -11,7 +11,6 @@ const magneticTargets = document.querySelectorAll("[data-magnetic]");
 const siteHeader = document.querySelector(".site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const primaryNav = document.querySelector(".nav-links");
-const inquiryLinks = document.querySelectorAll('a[href="https://forms.gle/DyUAwcRXq7fQseUB7"]');
 
 let activeIndex = 0;
 
@@ -43,23 +42,6 @@ document.addEventListener("click", (event) => {
   if (event.target instanceof Node && !siteHeader.contains(event.target)) {
     setMenuOpen(false);
   }
-});
-
-function trackInquiryLead() {
-  if (typeof window.fbq !== "function") {
-    return;
-  }
-
-  window.fbq("track", "Lead", {
-    content_name: "Uluwatu villa inquiry form",
-    content_category: "Real estate",
-    currency: "USD",
-    value: 399000
-  });
-}
-
-inquiryLinks.forEach((link) => {
-  link.addEventListener("click", trackInquiryLead);
 });
 
 const revealTargets = document.querySelectorAll(
